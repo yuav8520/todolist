@@ -1,6 +1,7 @@
 import './styles.css';
 import { bckColorChanger } from './modules/hover.js';
-import { addTasker } from './modules/side-bar/add-tasker.js';
+import { addTasker,formsubmit } from './modules/side-bar/add-tasker.js';
+
 
 const sidebar=document.querySelector('side-bar');
 const add=document.createElement('button');
@@ -20,10 +21,9 @@ add.addEventListener('click', ()=>{
     const popup=document.querySelector('#pop-up-tasker');
     popup.classList.remove('off');
 
-    const form=document.querySelector('form:not(.off)');
-    const submit=form.querySelector('button[type="submit"]');
-    submit.addEventListener('click', (e)=>e.preventDefault());
-    submit.addEventListener('click', (e)=>addTasker(e.target));
+     formsubmit();//function that look at on screen form and add the input value to 
+     // a list
+
 });
 
 
