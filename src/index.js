@@ -1,6 +1,6 @@
 import './styles.css';
 import { bckColorChanger } from './modules/hover.js';
-import { addTasker,formsubmit } from './modules/side-bar/add-tasker.js';
+import { formsubmit } from './modules/side-bar/add-tasker.js';
 
 
 const sidebar=document.querySelector('side-bar');
@@ -14,18 +14,25 @@ div.addEventListener('mouseover', (e)=>bckColorChanger(e,`grey`));
 div.addEventListener('mouseout', (e)=>bckColorChanger(e,`white`));
 
 
-add.textContent="Add";//add button functions
-//we want pop up to hide every thing when clicked 
-//and i want when i finish that it'll add the tasker as well as disppear
-add.addEventListener('click', ()=>{
+add.textContent="Add";//add button opens a form to add tasker
+add.addEventListener('click', (e)=>{
     const popup=document.querySelector('#pop-up-tasker');
     popup.classList.remove('off');
 
-     formsubmit();//function that look at on screen form and add the input value to 
+     formsubmit(e.target);//function that look at on screen form and add the input value to 
      // a list
 
-});
 
+});
+//creates form to content
+(function formMakerContent(){
+const form=document.createElement('form');
+form.classList.add('off');
+form.id='form-task-content';
+const input=document.createElement('input');
+const submit=document.createElement('button');
+const priorty=document.createElement('radio');
+})();
 
 sidebar.append(div);
 sidebar.append(list);
