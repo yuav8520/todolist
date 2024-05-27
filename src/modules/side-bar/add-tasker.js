@@ -40,21 +40,31 @@ function addsTask(button){
     console.log(button);
 
 }
-function addContentTasker(item){
+function addContentTasker(item){//function for creating the content of the tasker
+    console.log(document.querySelector('h2')===null)
+    if(document.querySelector('h2')===null)
+        { titleDoesnotexist(item);  }
+    else{titleExists(item);    }
+
+}
+function titleExists(item){//if there is content already in content
     const content = document.querySelector('content');
+    let title=content.querySelector('h2');
+    let button=content.querySelector('button');
+    button.remove();
+    title.remove();
+    titleDoesnotexist(item);
+}
+function titleDoesnotexist(item){///if there isn't content already in content
+    const content = document.querySelector('content');
+    console.log(item);
     const title = document.createElement('h2');
-    const addTask = document.createElement('button');
     title.textContent = item.textContent;
+    content.append(title);
+    const addTask = document.createElement('button');
     addTask.textContent = 'Add Task';
     addTask.addEventListener('click', (e)=>addsTask(e.target));
-    content.append(title);
     content.append(addTask);
-    
-    //const tasksList = document.querySelector('ul');
-    //const tasksItems = document.createElement('li');
-
-
-    
 }
 
 export { formsubmit };
