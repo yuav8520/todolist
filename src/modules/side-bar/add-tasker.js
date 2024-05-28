@@ -1,4 +1,4 @@
-function formsubmit(button){
+function formsubmit(){
     const form=document.querySelector('form:not(.off)');
     const submit=form.querySelector('button[type="submit"]');
     submit.addEventListener('click', (e)=>e.preventDefault());
@@ -11,11 +11,22 @@ function formsubmit(button){
 
 
 }
-function addTasker(button) {//recives the submit button that was clicked
+function addTasker(buttonOrArray) {//recives the submit button or array that was clicked
     //if it's a form we want to get the name and add it to list 
-    const form =button.closest('form');
-    if(form){
-        
+    //and an array we want to add
+    if(Array.isArray(buttonOrArray)){
+        const taskerList = document.querySelector('ul');
+        buttonOrArray.forEach(element => {
+            const taskerItem = document.createElement('li');
+            taskerItem.textContent=element;
+            taskerItem.addEventListener('click', (e)=>addContentTasker(e.target));
+            taskerList.append(taskerItem);
+        });
+
+    }
+    
+    else{
+        const form =buttonOrArray.closest('form');
         const tasker = form.querySelector(`.input-text`);
         const taskerList = document.querySelector('ul');
         const taskerItem = document.createElement('li');
@@ -27,17 +38,19 @@ function addTasker(button) {//recives the submit button that was clicked
         form.classList.add('off');
         taskerItem.addEventListener('click', (e)=>addContentTasker(e.target));
     }
-    
+
 }
 function addsTask(button){
     const body=document.querySelector('body');
     const form=document.createElement('form');
     const input=document.createElement('input');
     const submit=document.createElement('button');
-    body.append(form);
+    const priorty=document.createElement('select');
+    populatePriorty(optionPriorty,priorty)
+    form.append(priorty)
     form.append(input);
     form.append(submit);
-    console.log(button);
+    body.append(form);
 
 }
 function addContentTasker(item){//function for creating the content of the tasker
@@ -66,5 +79,15 @@ function titleDoesnotexist(item){///if there isn't content already in content
     addTask.addEventListener('click', (e)=>addsTask(e.target));
     content.append(addTask);
 }
+const optionPriorty=[
+    { value: 'low', label: 'low priorty' },
+    { value: 'mid', label: 'medium priorty' },
+    { value: 'high', label: 'high priorty'}
+];
+function populatePriorty(array,select){
+    array.forEach(option => {
+        select.value=option.value;
+        //select.textContent=option.label
+    });}
 
-export { formsubmit };
+export { formsubmit ,addTasker};
