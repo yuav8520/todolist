@@ -39,3 +39,8 @@ ul{
 side-bar ul li:hover{
     background-color: gray;
 }
+#task-title{
+    position: absolute;
+    left: 35dvw;
+    top:10dvh
+}

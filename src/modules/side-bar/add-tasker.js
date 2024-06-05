@@ -1,14 +1,13 @@
 //this page is calling functions from ./addtotasker
-import {addTaskerIfArray,addTaskerIfButton} from './addToTasker'
+import {addTaskerIfArray,addTaskerIfButton,addTaskIfArray,addTaskIfButton} from './addToTasker'
 
-function formsubmit(){
-    const form=document.querySelector('form:not(.off)');
+function formsubmit(form){
     const submit=form.querySelector('button[type="submit"]');
     submit.addEventListener('click', (e)=>e.preventDefault());
     if(form.id=='pop-up-tasker'){
         submit.addEventListener('click', (e)=>addTasker(e.target));}
-    if(form.id==='pop-up-task'){
-        form.addEventListener('submit', (e)=>addsTask(e.target));}
+    if(form.id==='pop-up-task'){console.log("hello");
+        submit.addEventListener('click', (e)=>addTask(e.target));}
 
 }
 
@@ -20,9 +19,10 @@ function addTasker(buttonOrArray) {//recives the submit button or array that was
         addTaskerIfArray(buttonOrArray) }    
     else{addTaskerIfButton(buttonOrArray)}}
 
-    function addsTask(buttonOrArray) {
+    function addTask(buttonOrArray) {
         if(Array.isArray(buttonOrArray)){
             addTaskIfArray(buttonOrArray) }    
         else{addTaskIfButton(buttonOrArray)}}
+    
 
 export { formsubmit ,addTasker};

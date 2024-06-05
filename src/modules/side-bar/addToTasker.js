@@ -1,4 +1,4 @@
-
+import { openForm } from "../button/buttons.js";
 function addContentTasker(item){//function for creating the content of the tasker
 
     if(document.querySelector('h2')===null)
@@ -42,44 +42,50 @@ form.classList.add('off');
 function titleDoesnotexist(item){///if there isn't content already in content
     const content = document.querySelector('content');
     const title = document.createElement('h2');
+    const addTask=document.createElement('button');
+    addTask.id='add-task-button';
+    openForm(addTask);
     title.textContent = item.textContent;
     content.append(title);
-    const addTask = document.createElement('button');
-    addTask.textContent = 'Add Task';
-    addTask.addEventListener('click', (e)=>addsTask(e.target));//event listner adds button to add task to list
     content.append(addTask);
+   addTask.addEventListener('click', (e)=>addTaskIfButton(e.target));//event listner adds button to add task to list
+  
 }
-function addsTask(){//creates form to add task to list
+function addTaskIfButton(button){//creates form to add task to list
     const body=document.querySelector('body');//declrations
-   const form=document.querySelector('#pop-up-task');
-
-    //form.id='form-task-content';
+    const form=document.querySelector('#pop-up-task');
     const input=document.createElement('input');
     const submit=document.createElement('button');
-    const title=document.createElement('input');
-    const description=document.createElement('textarea');
-    const dueDate=document.createElement('input');
-    const labelDueDate = document.createElement('label');
-    labelDueDate.setAttribute('for', 'dueDate');
-    labelDueDate.textContent = 'Due Date:';
-    form.appendChild(labelDueDate);
+    submit.textContent="submit";
+    submit.addEventListener('click', (e)=>e.preventDefault());
+
+    const title=document.createElement('h2');
+    title.textContent="Add Task";
+    title.setAttribute('id','task-title');
+    //const description=document.createElement('textarea');
+    //const dueDate=document.createElement('input');
+    //const labelDueDate = document.createElement('label');
+    //labelDueDate.setAttribute('for', 'dueDate');
+    //labelDueDate.textContent = 'Due Date:';
 
 
 
-    submit.addEventListener('click', (e)=>e.preventDefault());//eventlisnters
-    addsPriority();//functions
-    //populatePriority(optionPriorty,priorty);//functions
 
-    form.append(priorty);//append
+   addsPriority(form);//functions adds priorty to this form
+  
+
+
     form.append(input);
     form.append(submit);
+    form.append(title);
     body.append(form);
-    form.classList.add('off');
+    //form.classList.add('off');
 }
-/*addTaskerIfArray(array);
+function addTaskIfArray(array)
 {
-console.log('hello');
+console.log("array",array);
 }
+/*
 addTaskerIfButton(button);
 {    const body=document.querySelector('body');//declrations
 const form=button.closest('form');
@@ -96,21 +102,20 @@ const form=button.closest('form');
  form.appendChild(labelDueDate);
 
 }*/
-function addsPriority(){//creates priorty selctor +label 
-const form = document.querySelector('form');
+function addsPriority(form){//creates priorty selctor +label 
 const priorty = document.createElement('select');
 priorty.id = 'priorty';
 populatePriority(optionPriorty, priorty);
-addLabel('Priorty');
+//addLabel('Priorty');
 form.appendChild(priorty);
 }
-function addLabel(nameOfLabel)//hopefully adds label to everything i want
-{   const form = document.querySelector('form');
+/*function addLabel(nameOfLabel)//hopefully adds label to everything i want
+{   const form = document.querySelector('#pop-up-task');
     const label = document.createElement('label');
     //label.setAttribute('for', nameOfLabel);
     label.textContent = `${nameOfLabel} :`;
     form.append(label);
-}
+}*/
 const optionPriorty=[
     { value: 'low', label: 'low priorty' },
     { value: 'mid', label: 'medium priorty' },
@@ -125,4 +130,5 @@ function populatePriority(array, select) {
     });
 }
 
-export {addTaskerIfArray ,addTaskerIfButton} 
+
+export {addTaskerIfArray, addTaskerIfButton, addTaskIfArray, addTaskIfButton}
