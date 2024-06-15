@@ -6,6 +6,7 @@ import { addTasker } from './modules/side-bar/add-tasker.js';
 const sidebar=document.querySelector('side-bar');
 const addtaskerbutton=document.createElement('button');
 const list=document.createElement('ul');
+list.setAttribute('id','tasker-list');
 
 addtaskerbutton.setAttribute('id', 'add-tasker-button');
 openForm(addtaskerbutton);

@@ -6,6 +6,7 @@ function addContentTasker(item){//function for creating the content of the taske
     else{titleExists(item);    }
 
 }
+
 function titleExists(item){//if there is content already in content
     const content = document.querySelector('content');
     let title=content.querySelector('h2');
@@ -15,7 +16,7 @@ function titleExists(item){//if there is content already in content
     titleDoesnotexist(item);
 }
 function addTaskerIfArray(array) {
-    const taskerList = document.querySelector('ul');
+    const taskerList = document.querySelector('#tasker-list');
 
             array.forEach(element => {
             const taskerItem = document.createElement('li');
@@ -24,7 +25,7 @@ function addTaskerIfArray(array) {
             taskerList.append(taskerItem);
         })};
 
-function addTaskerIfButton(button)
+function addTaskerIfButton()
 { const form =document.querySelector('#pop-up-tasker');
 const tasker = form.querySelector(`.input-text`);
 const taskerList = document.querySelector('ul');
@@ -43,65 +44,53 @@ function titleDoesnotexist(item){///if there isn't content already in content
     const content = document.querySelector('content');
     const title = document.createElement('h2');
     const addTask=document.createElement('button');
+    const taskList = document.createElement('ul');  
+
+    taskList.id='task-list';
     addTask.id='add-task-button';
+
     openForm(addTask);
     title.textContent = item.textContent;
+
     content.append(title);
     content.append(addTask);
+    content.append(taskList);
    addTask.addEventListener('click', (e)=>addTaskIfButton(e.target));//event listner adds button to add task to list
   
 }
-function addTaskIfButton(button){//creates form to add task to list
-    const body=document.querySelector('body');//declrations
+function addTaskIfButton(){//creates form to add task to list
+//declrations
     const form=document.querySelector('#pop-up-task');
-    const input=document.createElement('input');
-    const submit=document.createElement('button');
-    submit.textContent="submit";
-    submit.addEventListener('click', (e)=>e.preventDefault());
+    addcontentformtask(form)//function for adding what is inside of the form
+    const taskList = document.querySelector('#task-list');
+    
 
-    const title=document.createElement('h2');
-    title.textContent="Add Task";
-    title.setAttribute('id','task-title');
+
+
+
     //const description=document.createElement('textarea');
     //const dueDate=document.createElement('input');
     //const labelDueDate = document.createElement('label');
     //labelDueDate.setAttribute('for', 'dueDate');
     //labelDueDate.textContent = 'Due Date:';
-
-
-
-
-   addsPriority(form);//functions adds priorty to this form
+   //functions adds priorty to this form
   
 
 
-    form.append(input);
-    form.append(submit);
-    form.append(title);
-    body.append(form);
+
+
     //form.classList.add('off');
 }
 function addTaskIfArray(array)
 {
-console.log("array",array);
+    const taskList = document.querySelector('#task-list');
+    array.forEach(element => {
+        const taskItem = document.createElement('li');
+        taskItem.textContent = element;
+        taskList.append(taskItem);
+    })
 }
-/*
-addTaskerIfButton(button);
-{    const body=document.querySelector('body');//declrations
-const form=button.closest('form');
 
- //form.id='form-task-content';
- const input=document.createElement('input');
- const submit=document.createElement('button');
- const title=document.createElement('input');
- const description=document.createElement('textarea');
- const dueDate=document.createElement('input');
- /*const labelDueDate = document.createElement('label');
- labelDueDate.setAttribute('for', 'dueDate');
- labelDueDate.textContent = 'Due Date:';
- form.appendChild(labelDueDate);
-
-}*/
 function addsPriority(form){//creates priorty selctor +label 
 const priorty = document.createElement('select');
 priorty.id = 'priorty';
@@ -129,6 +118,30 @@ function populatePriority(array, select) {
         select.appendChild(opt);
     });
 }
-
-
+function addcontentformtask(form){
+    if(form.querySelector('#priorty')===null)
+        {  addsPriority(form);}
+  
+    const input=form.querySelector('.input-text');
+    const submit=form.querySelector('button');
+    submit.textContent="submit";
+    submit.addEventListener('click', (e)=>e.preventDefault());
+    submit.addEventListener('click', ()=>buttonfunctiontask(form));
+    const title=document.createElement('h2');
+    title.textContent="Add Task";
+    title.setAttribute('id','task-title');
+    form.append(input);
+    form.append(submit);
+    form.append(title);
+}
+function buttonfunctiontask(form){
+    const input=form.querySelector('.input-text');
+    const taskList = document.querySelector('#task-list');
+    const taskItem = document.createElement('li');
+    if(input.value!==""){
+    taskItem.textContent = input.value;
+    taskList.append(taskItem);
+    input.value="";}
+    form.classList.add('off');
+}
 export {addTaskerIfArray, addTaskerIfButton, addTaskIfArray, addTaskIfButton}
