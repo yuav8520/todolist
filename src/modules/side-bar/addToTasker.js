@@ -1,4 +1,5 @@
 import { openForm } from "../button/buttons.js";
+import { taskSubmit} from "../content-task/addcontentformtaskfunctions.js";
 function addContentTasker(item){//function for creating the content of the tasker
 
     if(document.querySelector('h2')===null)
@@ -124,24 +125,13 @@ function addcontentformtask(form){
   
     const input=form.querySelector('.input-text');
     const submit=form.querySelector('button');
-    submit.textContent="submit";
-    submit.addEventListener('click', (e)=>e.preventDefault());
-    submit.addEventListener('click', ()=>buttonfunctiontask(form));
-    const title=document.createElement('h2');
-    title.textContent="Add Task";
-    title.setAttribute('id','task-title');
+    const priorty=form.querySelector('#priorty');
+    taskSubmit(form,submit,priorty);
+ 
+
     form.append(input);
     form.append(submit);
-    form.append(title);
+
 }
-function buttonfunctiontask(form){
-    const input=form.querySelector('.input-text');
-    const taskList = document.querySelector('#task-list');
-    const taskItem = document.createElement('li');
-    if(input.value!==""){
-    taskItem.textContent = input.value;
-    taskList.append(taskItem);
-    input.value="";}
-    form.classList.add('off');
-}
+
 export {addTaskerIfArray, addTaskerIfButton, addTaskIfArray, addTaskIfButton}
