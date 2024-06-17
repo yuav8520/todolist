@@ -17,23 +17,26 @@ function buttonfunctiontask(form){
     const taskList = document.querySelector('#task-list');
     const taskItem = document.createElement('li');
     if(input.value!==""){
-        appendinfotask(taskList,taskItem,form,priorty,input);}
+        appendinfotask(taskList,taskItem,form,priorty,input,descrpition);}
     form.classList.add('off');
 }
-function appendinfotask(taskList,taskItem,form,priorty,input){
+function appendinfotask(taskList,taskItem,form,priorty,input,descrpition){
+    addNameTask(input,taskItem);
     addPriorityTask(priorty,taskItem);
-    taskItem.textContent = input.value;
+    addDescrpitionTask(descrpition,taskItem);
     taskList.append(taskItem);
     input.value="";
 
+}
+function addNameTask(input,taskItem){
+    const nameTask=document.createElement('div');
+    nameTask.textContent=input.value;
+    taskItem.append(nameTask);
 }
 function addPriorityTask(priorty,taskItem){
     const priortyTask=document.createElement('div');
     priortyTask.textContent=priorty.value;
     console.log(priortyTask.textContent)
     taskItem.append(priortyTask);
-    
-
-
 }
 export {taskSubmit};

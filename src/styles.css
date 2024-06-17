@@ -44,3 +44,43 @@ side-bar ul li:hover{
     left: 35dvw;
     top:10dvh
 }
+#descrpition,#descrpition-label,#priorty,#input-task,#input-task-label,#priorty-label,#due-date,#due-date-label,#submit-task{
+    position: absolute;
+}
+#descrpition{
+    left: 30dvw;
+    top: 50dvh;
+}
+#descrpition-label{
+    left: 14dvw;
+    top: 50dvh;
+}
+#priorty{
+    left: 30dvw;
+    top: 60dvh;
+}
+#priorty-label{
+    left: 14dvw;
+    top: 60dvh;
+}
+#task-label{
+    left: 14dvw;
+    
+}
+#due-date{
+    top: 70dvh;
+}
+#due-date-label{
+top: 70dvh;
+left: 14dvw;
+}
+#input-task{
+    top: 30dvh;
+}
+#input-task-label{
+    top: 35dvh;
+    left: 14dvw;
+}
+#submit-task{
+    left: 55dvw;
+}
