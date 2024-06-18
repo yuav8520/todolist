@@ -1,5 +1,7 @@
+import { ta } from "date-fns/locale";
 import { openForm } from "../button/buttons.js";
 import { taskSubmit} from "../content-task/addcontentformtaskfunctions.js";
+import { loadList } from "../content-task/infoStorage.js";
 function addContentTasker(item){//function for creating the content of the tasker
 
     if(document.querySelector('h2')===null)
@@ -12,9 +14,24 @@ function titleExists(item){//if there is content already in content
     const content = document.querySelector('content');
     let title=content.querySelector('h2');
     let button=content.querySelector('button');
+    let list=content.querySelector('ul');
+    let listitems=content.querySelectorAll('li');
     button.remove();
     title.remove();
+    listitemsremove(listitems,item);
+    list.remove();
     titleDoesnotexist(item);
+}
+function listitemsremove(array,item){
+    const taskList = [];
+    array.forEach(element => {
+        taskList.push(element);
+        element.remove();
+    });
+    localStorage.setItem(`${item.textContent}`, JSON.stringify(taskList));
+    console.log(taskList);
+    console.log(localStorage.getItem(`${item.textContent}`));
+    console.log(JSON.parse(localStorage.getItem(`list${item.textContent}`)));
 }
 function addTaskerIfArray(array) {
     const taskerList = document.querySelector('#tasker-list');
@@ -22,6 +39,7 @@ function addTaskerIfArray(array) {
             array.forEach(element => {
             const taskerItem = document.createElement('li');
             taskerItem.textContent = element;
+            taskerItem.id=`${element}`;
             taskerItem.addEventListener('click', (e) => addContentTasker(e.target));
             taskerList.append(taskerItem);
         })};
@@ -32,6 +50,7 @@ const tasker = form.querySelector(`.input-text`);
 const taskerList = document.querySelector('ul');
 const taskerItem = document.createElement('li');
 taskerItem.textContent = tasker.value;
+taskerItem.id=`${tasker.value}`;
 tasker.value=null;
 if(taskerItem.textContent){
     taskerList.append(taskerItem);

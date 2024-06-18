@@ -1,3 +1,4 @@
+import { compareAsc, format } from "date-fns";
 function taskSubmit(form,submit,priorty){
     submit.textContent="submit";
     addTitleTask(form);
@@ -16,16 +17,17 @@ function buttonfunctiontask(form){
     const input=form.querySelector('.input-text');
     const taskList = document.querySelector('#task-list');
     const taskItem = document.createElement('li');
+    const dueDate=form.querySelector('#due-date');
     if(input.value!==""){
-        appendinfotask(taskList,taskItem,priorty,input,descrpition);}
+        appendinfotask(taskList,taskItem,priorty,input,descrpition,dueDate);}
     form.classList.add('off');
 }
-function appendinfotask(taskList,taskItem,priorty,input,descrpition){
+function appendinfotask(taskList,taskItem,priorty,input,descrpition,dueDate){
     const container=document.createElement('div');
     taskItem.append(container);
     addNameTask(input,container);
     addPriorityTask(priorty,container);
-    //addDueDate(dueDate,container);
+    addDueDate(dueDate,container);
     addDescrpitionTask(descrpition,container);
     taskList.append(taskItem);
     input.value="";
@@ -37,9 +39,10 @@ function addNameTask(input,container){
 function addPriorityTask(priorty,container){
     container.textContent+=` priorty is ${priorty.value}, `;
 }
-//function addDueDate(dueDate,container){
- //   container.textContent+=` due date is ${dueDate.value}`;
-//}
+function addDueDate(dueDate,container){
+    //const date=new Date(dueDate.value);
+   container.textContent+=` due date is ${dueDate.value}, `;
+}
 function addDescrpitionTask(descrpition,container){
     const descrpitiontext=document.createElement('textarea');
     descrpitiontext.classList.add('hidden');
