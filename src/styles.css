@@ -84,3 +84,6 @@ left: 14dvw;
 #submit-task{
     left: 55dvw;
 }
+.hidden{
+    display: none;
+}

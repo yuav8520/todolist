@@ -17,26 +17,45 @@ function buttonfunctiontask(form){
     const taskList = document.querySelector('#task-list');
     const taskItem = document.createElement('li');
     if(input.value!==""){
-        appendinfotask(taskList,taskItem,form,priorty,input,descrpition);}
+        appendinfotask(taskList,taskItem,priorty,input,descrpition);}
     form.classList.add('off');
 }
-function appendinfotask(taskList,taskItem,form,priorty,input,descrpition){
-    addNameTask(input,taskItem);
-    addPriorityTask(priorty,taskItem);
-    addDescrpitionTask(descrpition,taskItem);
+function appendinfotask(taskList,taskItem,priorty,input,descrpition){
+    const container=document.createElement('div');
+    taskItem.append(container);
+    addNameTask(input,container);
+    addPriorityTask(priorty,container);
+    //addDueDate(dueDate,container);
+    addDescrpitionTask(descrpition,container);
     taskList.append(taskItem);
     input.value="";
 
 }
-function addNameTask(input,taskItem){
-    const nameTask=document.createElement('div');
-    nameTask.textContent=input.value;
-    taskItem.append(nameTask);
+function addNameTask(input,container){
+    container.textContent+=`task is: ${input.value},`;
 }
-function addPriorityTask(priorty,taskItem){
-    const priortyTask=document.createElement('div');
-    priortyTask.textContent=priorty.value;
-    console.log(priortyTask.textContent)
-    taskItem.append(priortyTask);
+function addPriorityTask(priorty,container){
+    container.textContent+=` priorty is ${priorty.value}, `;
 }
+//function addDueDate(dueDate,container){
+ //   container.textContent+=` due date is ${dueDate.value}`;
+//}
+function addDescrpitionTask(descrpition,container){
+    const descrpitiontext=document.createElement('textarea');
+    descrpitiontext.classList.add('hidden');
+    descrpitiontext.value=descrpition.value;
+    const opendescrpition=document.createElement('button');
+    opendescrpition.textContent=" open description";
+    container.append(opendescrpition);
+    container.append(descrpitiontext);
+    opendescrpition.addEventListener('click', (e)=>opendescrpitiontask(e.target,descrpitiontext));
+}
+function opendescrpitiontask(button,descrpition){
+    if(descrpition.classList.contains('hidden')){
+        button.textContent="close description";
+        descrpition.classList.remove('hidden');
+    }
+    else{button.textContent="open description";
+        descrpition.classList.add('hidden');
+    }}
 export {taskSubmit};

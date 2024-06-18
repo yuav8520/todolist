@@ -6,7 +6,7 @@ function formsubmit(form){
     submit.addEventListener('click', (e)=>e.preventDefault());
     if(form.id=='pop-up-tasker'){
         submit.addEventListener('click', (e)=>addTasker(e.target));}
-    if(form.id==='pop-up-task'){console.log("hello");
+    if(form.id==='pop-up-task'){
         submit.addEventListener('click', (e)=>addTask(e.target));}
 
 }
